@@ -1,0 +1,52 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5em;
+}
+
+.question {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+  font-weight: bolder;
+}
+
+p {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+button {
+  font-size: 1em;
+  padding: 0.2em;
+  background-color: blueviolet;
+  color: white;
+  border: 1px solid #000000;
+  border-radius: 5%;
+}
+
+h1,
+p {
+  text-align: center;
+  max-width: 40%;
+}
+
+.submit {
+  width: fit-content;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#list {
+  flex-direction: column;
+  width: 30%;
+}
+
+.choice {
+  margin-bottom: 0.5em;
+}

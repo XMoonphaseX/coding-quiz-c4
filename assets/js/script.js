@@ -111,7 +111,7 @@ function drawGame() {
   button4.textContent = '4. ' + answersArr[0];
 }
 
-// Check answer function
+// TODO: Check answer function
 function checkAnswer() {
   
 }

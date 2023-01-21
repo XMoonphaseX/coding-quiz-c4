@@ -26,7 +26,6 @@ init
 // Variables
 let viewHighscores = document.querySelector('#viewHighscores');
 let timeRem = document.querySelector('#timeLeft');
-let timeLeft = 60;
 let question = document.querySelector('.question');
 let paragraph = document.querySelector('#p');
 let startButton = document.querySelector('.start');
@@ -80,17 +79,22 @@ let questionsArr = [
 // Initalize funtion
 function init() {
   viewHighscores.textContent = 'View Highscores';
-  timeRem.textContent = 'Time: ' + timeLeft + ' seconds';
+  /* timeRem.textContent = 'Time: ' + time + ' seconds'; */
   question.textContent = 'Coding Quiz Challenge'
   paragraph.textContent = 'Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!'
-  ol.setAttribute('style', 'display: none')
+  ol.setAttribute('style', 'display: none');
 }
 
 // startGame function
 function startGame() {
+  countdown(60);
   startButton.setAttribute('style', 'display: none');
   paragraph.setAttribute('style', 'display: none');
-  countdown();
+  drawGame();
+}
+
+//  Draw game function
+function drawGame() {
   let ranQuestion = randomizer()
   answersArr.push(
     ranQuestion.trueAnswer,
@@ -107,9 +111,15 @@ function startGame() {
   button4.textContent = '4. ' + answersArr[0];
 }
 
-function gameOver() {
-  timeRem.setAttribute('style', 'display: none');
+// Check answer function
+function checkAnswer() {
   
+}
+
+// Game over function
+function gameOver() {
+  ol.setAttribute('style', 'display: none')
+  question.textContent = 'All Done!';
 }
 
 // randomizer function
@@ -129,25 +139,32 @@ function answerRandomizer() {
 }
 
 // Countdown function
-function countdown() {
+function countdown(time) {
   let timeInterval = setInterval(function () {
-    // As long as the `timeLeft` is greater than 1
-    if (timeLeft != 1) {
-      // Set the `textContent` of `timeLeft` to show the remaining seconds
-      timeRem.textContent = 'Time: ' + timeLeft + ' seconds';
-      // Decrement `timeLeft` by 1
-      timeLeft--;
-    } else if (timeLeft === 1) {
-      // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-      timeRem.textContent = 'Time: ' + timeLeft + ' second';
-      timeLeft--;
-    } else {
-      // Once `timeLeft` gets to 0, set `timeLeft` to an empty string
+    // As long as the `time` is greater than 1
+    if (time > 1) {
+      // Set the `textContent` of `time` to show the remaining seconds
+      console.log(time)
+      timeRem.textContent = 'Time: ' + time + ' seconds';
+      // Decrement `time` by 1
+      time--;
+    }else if (time === 1) {
+      console.log(time)
+      // When `time` is equal to 1, rename to 'second' instead of 'seconds'
+      timeRem.textContent = 'Time: ' + time + ' second';
+      time--;
+    }else {
       timeRem.textContent = '';
+      console.log(time)
+      clearInterval(timeInterval);
       gameOver();
     }
   }, 1000);
 }
 
 init();
-startButton.addEventListener("click", startGame)
+startButton.addEventListener("click", startGame);
+button1.addEventListener("click", checkAnswer)
+button2.addEventListener("click", checkAnswer)
+button3.addEventListener("click", checkAnswer)
+button4.addEventListener("click", checkAnswer)

@@ -119,7 +119,9 @@ function drawGame() {
 
 // TODO: Check answer function
 function checkAnswer() {
-  button1.addEventListener("click", function() {
+  console.log(this.textContent)
+
+  /* button1.addEventListener("click", function() {
     if (this.textContent.slice(3,button1.textContent.length) == ranQuestion.trueAnswer) {
       console.log('correct')
     } else {
@@ -146,7 +148,7 @@ function checkAnswer() {
     } else {
       console.log('incorrect')
     }
-  });
+  }); */
 }
 
 // Game over function
@@ -165,9 +167,9 @@ function randomizer() {
 // answerRandomizer function
 function answerRandomizer() {
   index = Math.floor(Math.random() * answersArr.length)
-  console.log(index)
+  /* console.log(index) */
   let ranAnswer = answersArr[index];
-  console.log(ranAnswer)
+  /* console.log(ranAnswer) */
   answersArr.splice(index, 1)
   return ranAnswer;
 }
@@ -197,3 +199,7 @@ function countdown(time) {
 }
 
 init();
+button1.addEventListener("click", checkAnswer)
+button2.addEventListener("click", checkAnswer)
+button3.addEventListener("click", checkAnswer)
+button4.addEventListener("click", checkAnswer)

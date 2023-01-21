@@ -35,6 +35,8 @@ let button3 = document.querySelector('.num3');
 let button4 = document.querySelector('.num4');
 let choices = document.querySelector('.choice')
 let ol = document.querySelector('#list')
+let TorF = document.querySelector('#TorF')
+let ranQuestion
 let answersArr = []
 
 // Array questions
@@ -69,15 +71,18 @@ let questionsArr = [
   },
   /* {
     'question': '',
-    'trueAnswer': '',
-    'wrongAnswer1': '',
-    'wrongAnswer2': '',
-    'wrongAnswer3': '',
+    'answers': {
+      'trueAnswer': '',
+      'wrongAnswer1': '',
+      'wrongAnswer2': '',
+      'wrongAnswer3': '',',
+    }  
   }, */
 ]
 
 // Initalize funtion
 function init() {
+  startButton.addEventListener("click", startGame);
   viewHighscores.textContent = 'View Highscores';
   /* timeRem.textContent = 'Time: ' + time + ' seconds'; */
   question.textContent = 'Coding Quiz Challenge'
@@ -91,11 +96,12 @@ function startGame() {
   startButton.setAttribute('style', 'display: none');
   paragraph.setAttribute('style', 'display: none');
   drawGame();
+  checkAnswer();
 }
 
 //  Draw game function
 function drawGame() {
-  let ranQuestion = randomizer()
+  ranQuestion = randomizer()
   answersArr.push(
     ranQuestion.trueAnswer,
     ranQuestion.wrongAnswer1,
@@ -113,7 +119,34 @@ function drawGame() {
 
 // TODO: Check answer function
 function checkAnswer() {
-  
+  button1.addEventListener("click", function() {
+    if (this.textContent.slice(3,button1.textContent.length) == ranQuestion.trueAnswer) {
+      console.log('correct')
+    } else {
+      console.log('incorrect')
+    }
+  });
+  button2.addEventListener("click", function() {
+    if (this.textContent.slice(3,button2.textContent.length) == ranQuestion.trueAnswer) {
+      console.log('correct')
+    } else {
+      console.log('incorrect')
+    }
+  });
+  button3.addEventListener("click", function() {
+    if (this.textContent.slice(3,button3.textContent.length) == ranQuestion.trueAnswer) {
+      console.log('correct')
+    } else {
+      console.log('incorrect')
+    }
+  });
+  button4.addEventListener("click", function() {
+    if (this.textContent.slice(3,button4.textContent.length) == ranQuestion.trueAnswer) {
+      console.log('correct')
+    } else {
+      console.log('incorrect')
+    }
+  });
 }
 
 // Game over function
@@ -125,6 +158,7 @@ function gameOver() {
 // randomizer function
 function randomizer() {
   let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
+  console.log(ranQuestion)
   return ranQuestion;
 }
 
@@ -144,7 +178,7 @@ function countdown(time) {
     // As long as the `time` is greater than 1
     if (time > 1) {
       // Set the `textContent` of `time` to show the remaining seconds
-      console.log(time)
+      /* console.log(time) */
       timeRem.textContent = 'Time: ' + time + ' seconds';
       // Decrement `time` by 1
       time--;
@@ -163,8 +197,3 @@ function countdown(time) {
 }
 
 init();
-startButton.addEventListener("click", startGame);
-button1.addEventListener("click", checkAnswer)
-button2.addEventListener("click", checkAnswer)
-button3.addEventListener("click", checkAnswer)
-button4.addEventListener("click", checkAnswer)

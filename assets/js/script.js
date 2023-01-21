@@ -37,38 +37,49 @@ let choices = document.querySelector('.choice')
 let ol = document.querySelector('#list')
 let TorF = document.querySelector('#TorF')
 let ranQuestion
-let answersArr = []
 
 // Array questions
 let questionsArr = [
   {
     'question': 'Commonly used data types DO NOT include:',
-    'trueAnswer': 'alert',
-    'wrongAnswer1': 'string',
-    'wrongAnswer2': 'boolean',
-    'wrongAnswer3': 'int',
+    'answers': {
+      'trueAnswer': 'alert',
+      'wrongAnswer1': 'string',
+      'wrongAnswer2': 'boolean',
+      'wrongAnswer3': 'int',
+    }
   },
+
   {
     'question': 'Inside which HTML element do we put the JavaScript?',
-    'trueAnswer': '<script>',
-    'wrongAnswer1': '<js>',
-    'wrongAnswer2': '<scripting>',
-    'wrongAnswer3': '<javascript>',
+    'answers': {
+      'trueAnswer': '<script>',
+      'wrongAnswer1': '<js>',
+      'wrongAnswer2': '<scripting>',
+      'wrongAnswer3': '<javascript>',
+    }
   },
+
   {
     'question': 'Where is the correct place to insert a JavaScript?',
-    'trueAnswer': 'The bottom of the <body> section',
-    'wrongAnswer1': 'The <head> section',
-    'wrongAnswer2': 'The top of the <body> section',
-    'wrongAnswer3': 'Both the <head> section and the <body> section are correct'
+    'answers': {
+      'trueAnswer': 'The bottom of the <body> section',
+      'wrongAnswer1': 'The <head> section',
+      'wrongAnswer2': 'The top of the <body> section',
+      'wrongAnswer3': 'Both the <head> section and the <body> section are correct'
+    }
   },
+
   {
     'question': 'What is the correct syntax for referring to an extrenal script called "xxx.js"?',
-    'trueAnswer': '<script src="xxx.js">',
-    'wrongAnswer1': '<script name="xxx.js">',
-    'wrongAnswer2': '<script id="xxx.js">',
-    'wrongAnswer3': '<script href="xxx.js">',
+    'answers': {
+      'trueAnswer': '<script src="xxx.js">',
+      'wrongAnswer1': '<script name="xxx.js">',
+      'wrongAnswer2': '<script id="xxx.js">',
+      'wrongAnswer3': '<script href="xxx.js">',
+    }
   },
+
   /* {
     'question': '',
     'answers': {
@@ -102,49 +113,72 @@ function startGame() {
 //  Draw game function
 function drawGame() {
   ranQuestion = randomizer()
-  answersArr.push(
+  /* answersArr.push(
     ranQuestion.trueAnswer,
     ranQuestion.wrongAnswer1,
     ranQuestion.wrongAnswer2,
     ranQuestion.wrongAnswer3
-    )
-  console.log(answersArr);
+    ) */
+  // console.log(answersArr);
   question.textContent = ranQuestion.question;
   ol.setAttribute('style', 'display: flex')
   button1.textContent = '1. ' + answerRandomizer();
   button2.textContent = '2. ' + answerRandomizer();
   button3.textContent = '3. ' + answerRandomizer();
-  button4.textContent = '4. ' + answersArr[0];
+  // button4.textContent = '4. ' + answersArr[0];
 }
 
-// TODO: Check answer function
+// Check answer function
 function checkAnswer() {
   button1.addEventListener("click", function() {
-    if (this.textContent.slice(3,button1.textContent.length) == ranQuestion.trueAnswer) {
-      console.log('correct')
+    console.log('true ans: ' + ranQuestion.trueAnswer)
+    console.log(this.textContent.slice(3,button1.textContent.length))
+    if (this.textContent.slice(3,button1.textContent.length) == ranQuestion.trueAnswer &&
+     this.textContent.slice(3,button1.textContent.length).length === ranQuestion.trueAnswer.length) {
+      TorF.textContent = 'Correct!'
+      TorF.setAttribute('style', 'font-style: italic')
     } else {
-      console.log('incorrect')
+      TorF.textContent = 'Correct!'
+      TorF.setAttribute('style', 'font-style: italic')
     }
   });
+
   button2.addEventListener("click", function() {
-    if (this.textContent.slice(3,button2.textContent.length) == ranQuestion.trueAnswer) {
-      console.log('correct')
+    console.log('true ans: ' + ranQuestion.trueAnswer)
+    console.log(this.textContent.slice(3,button2.textContent.length))
+    if (this.textContent.slice(3,button2.textContent.length) === ranQuestion.trueAnswer &&
+    this.textContent.slice(3,button2.textContent.length).length === ranQuestion.trueAnswer.length) {
+      TorF.textContent = 'Correct!'
+      TorF.setAttribute('style', 'font-style: italic')
     } else {
-      console.log('incorrect')
+      TorF.textContent = 'Incorrect!'
+      TorF.setAttribute('style', 'font-style: italic')
     }
   });
+
   button3.addEventListener("click", function() {
-    if (this.textContent.slice(3,button3.textContent.length) == ranQuestion.trueAnswer) {
-      console.log('correct')
+    console.log('true ans: ' + ranQuestion.trueAnswer)
+    console.log(this.textContent.slice(3,button3.textContent.length))
+    if (this.textContent.slice(3,button3.textContent.length) === ranQuestion.trueAnswer &&
+    this.textContent.slice(3,button3.textContent.length).length === ranQuestion.trueAnswer.length) {
+      TorF.textContent = 'Correct!'
+      TorF.setAttribute('style', 'font-style: italic')
     } else {
-      console.log('incorrect')
+      TorF.textContent = 'Incorrect!'
+      TorF.setAttribute('style', 'font-style: italic')
     }
   });
+
   button4.addEventListener("click", function() {
-    if (this.textContent.slice(3,button4.textContent.length) == ranQuestion.trueAnswer) {
-      console.log('correct')
+    console.log('true ans: ' + ranQuestion.trueAnswer)
+    console.log(this.textContent.slice(3,button4.textContent.length))
+    if (this.textContent.slice(3,button4.textContent.length) === ranQuestion.trueAnswer &&
+    this.textContent.slice(3,button4.textContent.length).length === ranQuestion.trueAnswer.length) {
+      TorF.textContent = 'Correct!'
+      TorF.setAttribute('style', 'font-style: italic')
     } else {
-      console.log('incorrect')
+      TorF.textContent = 'Incorrect!'
+      TorF.setAttribute('style', 'font-style: italic')
     }
   });
 }
@@ -164,11 +198,10 @@ function randomizer() {
 
 // answerRandomizer function
 function answerRandomizer() {
-  index = Math.floor(Math.random() * answersArr.length)
+  index = Math.floor(Math.random() * 3)
   console.log(index)
-  let ranAnswer = answersArr[index];
+  let ranAnswer = ranQuestion.answers[index];
   console.log(ranAnswer)
-  answersArr.splice(index, 1)
   return ranAnswer;
 }
 

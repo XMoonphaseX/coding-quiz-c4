@@ -41,9 +41,10 @@ let dev1 = document.querySelector('#dev1')
 let dev2 = document.querySelector('#dev2')
 let time = 60;
 // let choices = document.getElementsByClassName('.choice')
-let ol = document.querySelector('#list')
+let ol = document.querySelector('#orderedList')
 let TorF = document.querySelector('#TorF')
 let ranQuestion, ranAnswer, values
+let localScores = []
 
 // Array questions
 let questionsArr = [
@@ -130,6 +131,33 @@ function startGame() {
   dev2.addEventListener("click", function() {time = time - 30})
 }
 
+// highscores function
+function highscores() {
+  question.textContent = 'Highscores';
+  paragraph.setAttribute('style', 'display: flex');
+  console.log(JSON.parse(localStorage.getItem('scores')))
+  paragraph.textContent = JSON.parse(localStorage.getItem('scores'))
+  ol.setAttribute('style', 'display: none');
+  startButton.setAttribute('style', 'display: none');
+  viewHighscores.setAttribute('style', 'display: none');
+  allDone.setAttribute('style', 'display: none');
+  TorF.setAttribute('style', 'display: none');
+  // Render a new li for each todo
+  for (var i = 0; i < todos.length; i++) {
+    let localScores = todos[i];
+
+    let li = document.createElement("li");
+    li.textContent = todo;
+    li.setAttribute("data-index", i);
+
+    let button = document.createElement("button");
+    button.textContent = "Complete ✔️";
+
+    li.appendChild(button);
+    todoList.appendChild(li);
+  }
+}
+
 //  Draw game function
 function drawGame() {
   ranQuestion = randomizer()
@@ -164,7 +192,8 @@ function checkAnswer() {
 
 // Function store score
 function storeScore(initals) {
-  localStorage.setItem("Scores", initals + ': ' + time);
+  localScores.unshift(initals + ': ' + time)
+  localStorage.setItem("scores", JSON.stringify(localScores));
 }
 
 // Game over function
@@ -221,7 +250,8 @@ function countdown() {
 }
 
 init();
-button1.addEventListener("click", this.checkAnswer)
-button2.addEventListener("click", this.checkAnswer)
-button3.addEventListener("click", this.checkAnswer)
-button4.addEventListener("click", this.checkAnswer)
+button1.addEventListener("click", this.checkAnswer);
+button2.addEventListener("click", this.checkAnswer);
+button3.addEventListener("click", this.checkAnswer);
+button4.addEventListener("click", this.checkAnswer);
+viewHighscores.addEventListener("click", highscores)

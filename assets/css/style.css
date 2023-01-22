@@ -43,7 +43,7 @@ main {
   align-items: center;
 }
 
-#list {
+#orderedList {
   flex-direction: column;
   width: 30%;
 }

@@ -113,18 +113,12 @@ function startGame() {
 //  Draw game function
 function drawGame() {
   ranQuestion = randomizer()
-  /* answersArr.push(
-    ranQuestion.trueAnswer,
-    ranQuestion.wrongAnswer1,
-    ranQuestion.wrongAnswer2,
-    ranQuestion.wrongAnswer3
-    ) */
   // console.log(answersArr);
   question.textContent = ranQuestion.question;
   ol.setAttribute('style', 'display: flex')
-  button1.textContent = '1. ' + answerRandomizer();
-  button2.textContent = '2. ' + answerRandomizer();
-  button3.textContent = '3. ' + answerRandomizer();
+  button1.textContent = '1. ' + answerRandomizer(ranQuestion.answers);
+  button2.textContent = '2. ' + answerRandomizer(ranQuestion.answers);
+  button3.textContent = '3. ' + answerRandomizer(ranQuestion.answers);
   // button4.textContent = '4. ' + answersArr[0];
 }
 
@@ -197,12 +191,18 @@ function randomizer() {
 }
 
 // answerRandomizer function
-function answerRandomizer() {
+function answerRandomizer(obj) {
+  let keys = Object.values(obj);
+  let ranKey = keys[Math.floor(Math.random() * keys.length)];
+  console.log(ranKey) 
+  let ranAnswer = ranQuestion['question["rankey"]']
+  console.log(ranAnswer)
+  /* console.log(answersArr)
   index = Math.floor(Math.random() * 3)
   console.log(index)
   let ranAnswer = ranQuestion.answers[index];
   console.log(ranAnswer)
-  return ranAnswer;
+  return ranAnswer; */
 }
 
 // Countdown function

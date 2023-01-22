@@ -38,6 +38,12 @@ let ol = document.querySelector('#list')
 let TorF = document.querySelector('#TorF')
 let ranQuestion, ranAnswer, values
 
+let score = {
+  'correct': 0,
+  'incorrect': 0,
+  'time': 0,
+}
+
 // Array questions
 let questionsArr = [
   {
@@ -130,16 +136,27 @@ function checkAnswer() {
   /* console.log(this.textContent)
   console.log('true ans: ' + ranQuestion.answers.trueAnswer)
   console.log(this.textContent.slice(3,this.textContent.length)) */
-  let text = this.textContent.slice(3,this.textContent.length)
+  let text = this.textContent.slice(3,this.textContent.length);
   if (text == ranQuestion.answers.trueAnswer) {
-    TorF.textContent = 'Correct!'
-    TorF.setAttribute('style', 'font-style: italic')
+    TorF.textContent = 'Correct!';
+    TorF.setAttribute('style', 'font-style: italic');
+    score.correct = score.correct + 1;
+    // console.log(score);
+    drawGame();
     return true;
   } else {
-    TorF.textContent = 'Incorrect!'
-    TorF.setAttribute('style', 'font-style: italic')
+    TorF.textContent = 'Incorrect!';
+    TorF.setAttribute('style', 'font-style: italic');
+    score.incorrect = score.incorrect + 1
+    // console.log(score);
+    drawGame();
     return false;
   }
+}
+
+// Function store score
+function storeScore() {
+  localStorage.setItem("score", JSON.stringify(todos));
 }
 
 // Game over function

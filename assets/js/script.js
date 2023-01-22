@@ -33,11 +33,16 @@ let button1 = document.querySelector('.num1');
 let button2 = document.querySelector('.num2');
 let button3 = document.querySelector('.num3');
 let button4 = document.querySelector('.num4');
-let choices = document.querySelector('.choice')
+// let choices = document.getElementsByClassName('.choice')
 let ol = document.querySelector('#list')
 let TorF = document.querySelector('#TorF')
-let ranQuestion
-let answersArr = []
+let ranQuestion, ranAnswer, values
+
+let score = {
+  'correct': 0,
+  'incorrect': 0,
+  'time': 0,
+}
 
 // Array questions
 let questionsArr = [
@@ -108,28 +113,51 @@ function startGame() {
   startButton.setAttribute('style', 'display: none');
   paragraph.setAttribute('style', 'display: none');
   drawGame();
-  checkAnswer();
+  button1.addEventListener("click", checkAnswer);
+  button2.addEventListener("click", checkAnswer);
+  button3.addEventListener("click", checkAnswer);
+  button4.addEventListener("click", checkAnswer);
 }
 
 //  Draw game function
 function drawGame() {
   ranQuestion = randomizer()
+  // console.log(answersArr);
   question.textContent = ranQuestion.question;
   ol.setAttribute('style', 'display: flex')
   button1.textContent = '1. ' + answerRandomizer();
   button2.textContent = '2. ' + answerRandomizer();
   button3.textContent = '3. ' + answerRandomizer();
-  button4.textContent = '4. ' + answersArr[0];
+  button4.textContent = '4. ' + values[0];
 }
 
-// TODO: Check answer function
+// Check answer function
 function checkAnswer() {
-  console.log(this.textContent.slice(3, this.textContent.length))
-  /* if ((this.textContent.slice(3, this.textContent.length)) == ranQuestion.answers.trueAnswer) {
-    return false;
-  } else {
+  /* console.log(this.textContent)
+  console.log('true ans: ' + ranQuestion.answers.trueAnswer)
+  console.log(this.textContent.slice(3,this.textContent.length)) */
+  let text = this.textContent.slice(3,this.textContent.length);
+  if (text == ranQuestion.answers.trueAnswer) {
+    TorF.textContent = 'Correct!';
+    TorF.setAttribute('style', 'font-style: italic');
+    score.correct = score.correct + 1;
+    // console.log(score);
+    drawGame();
     return true;
-  } */
+  } else {
+    TorF.textContent = 'Incorrect!';
+    TorF.setAttribute('style', 'font-style: italic');
+    score.incorrect = score.incorrect + 1
+    // console.log(score);
+    drawGame();
+    return false;
+  }
+}
+
+// Function store score
+function storeScore() {
+  localStorage.setItem("score", JSON.stringify(todos));
+
 }
 
 // Game over function
@@ -140,24 +168,20 @@ function gameOver() {
 
 // randomizer function
 function randomizer() {
-  ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
+  let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
+  // console.log(ranQuestion)
+  values = Object.values(ranQuestion.answers);
+
   return ranQuestion;
 }
 
 // answerRandomizer function
 function answerRandomizer() {
-  answersArr = [
-    ranQuestion.answers.trueAnswer,
-    ranQuestion.answers.wrongAnswer1,
-    ranQuestion.answers.wrongAnswer2,
-    ranQuestion.answers.wrongAnswer3,
-  ]
-  console.log(answersArr)
-  i = Math.floor(Math.random() * 3)
-  console.log(i)
-  let ranAnswer = answersArr[i];
-  console.log(ranAnswer)
-  answersArr.delete(i);
+  let i = Math.floor(Math.random() * values.length)
+  // console.log(i)
+  let ranAnswer = values[i];
+  let splice = values.splice(i, 1);
+  // console.log(values + '||' + splice)
   return ranAnswer;
 }
 

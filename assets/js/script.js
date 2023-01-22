@@ -43,32 +43,44 @@ let answersArr = []
 let questionsArr = [
   {
     'question': 'Commonly used data types DO NOT include:',
-    'trueAnswer': 'alert',
-    'wrongAnswer1': 'string',
-    'wrongAnswer2': 'boolean',
-    'wrongAnswer3': 'int',
+    'answers': {
+      'trueAnswer': 'alert',
+      'wrongAnswer1': 'string',
+      'wrongAnswer2': 'boolean',
+      'wrongAnswer3': 'int',
+    }
   },
+
   {
     'question': 'Inside which HTML element do we put the JavaScript?',
-    'trueAnswer': '<script>',
-    'wrongAnswer1': '<js>',
-    'wrongAnswer2': '<scripting>',
-    'wrongAnswer3': '<javascript>',
+    'answers': {
+      'trueAnswer': '<script>',
+      'wrongAnswer1': '<js>',
+      'wrongAnswer2': '<scripting>',
+      'wrongAnswer3': '<javascript>',
+    }
   },
+
   {
     'question': 'Where is the correct place to insert a JavaScript?',
-    'trueAnswer': 'The bottom of the <body> section',
-    'wrongAnswer1': 'The <head> section',
-    'wrongAnswer2': 'The top of the <body> section',
-    'wrongAnswer3': 'Both the <head> section and the <body> section are correct'
+    'answers': {
+      'trueAnswer': 'The bottom of the <body> section',
+      'wrongAnswer1': 'The <head> section',
+      'wrongAnswer2': 'The top of the <body> section',
+      'wrongAnswer3': 'Both the <head> section and the <body> section are correct'
+    }
   },
+
   {
     'question': 'What is the correct syntax for referring to an extrenal script called "xxx.js"?',
-    'trueAnswer': '<script src="xxx.js">',
-    'wrongAnswer1': '<script name="xxx.js">',
-    'wrongAnswer2': '<script id="xxx.js">',
-    'wrongAnswer3': '<script href="xxx.js">',
+    'answers': {
+      'trueAnswer': '<script src="xxx.js">',
+      'wrongAnswer1': '<script name="xxx.js">',
+      'wrongAnswer2': '<script id="xxx.js">',
+      'wrongAnswer3': '<script href="xxx.js">',
+    }
   },
+
   /* {
     'question': '',
     'answers': {
@@ -102,13 +114,6 @@ function startGame() {
 //  Draw game function
 function drawGame() {
   ranQuestion = randomizer()
-  answersArr.push(
-    ranQuestion.trueAnswer,
-    ranQuestion.wrongAnswer1,
-    ranQuestion.wrongAnswer2,
-    ranQuestion.wrongAnswer3
-    )
-  console.log(answersArr);
   question.textContent = ranQuestion.question;
   ol.setAttribute('style', 'display: flex')
   button1.textContent = '1. ' + answerRandomizer();
@@ -119,36 +124,12 @@ function drawGame() {
 
 // TODO: Check answer function
 function checkAnswer() {
-  console.log(this.textContent)
-
-  /* button1.addEventListener("click", function() {
-    if (this.textContent.slice(3,button1.textContent.length) == ranQuestion.trueAnswer) {
-      console.log('correct')
-    } else {
-      console.log('incorrect')
-    }
-  });
-  button2.addEventListener("click", function() {
-    if (this.textContent.slice(3,button2.textContent.length) == ranQuestion.trueAnswer) {
-      console.log('correct')
-    } else {
-      console.log('incorrect')
-    }
-  });
-  button3.addEventListener("click", function() {
-    if (this.textContent.slice(3,button3.textContent.length) == ranQuestion.trueAnswer) {
-      console.log('correct')
-    } else {
-      console.log('incorrect')
-    }
-  });
-  button4.addEventListener("click", function() {
-    if (this.textContent.slice(3,button4.textContent.length) == ranQuestion.trueAnswer) {
-      console.log('correct')
-    } else {
-      console.log('incorrect')
-    }
-  }); */
+  console.log(this.textContent.slice(3, this.textContent.length))
+  /* if ((this.textContent.slice(3, this.textContent.length)) == ranQuestion.answers.trueAnswer) {
+    return false;
+  } else {
+    return true;
+  } */
 }
 
 // Game over function
@@ -159,18 +140,24 @@ function gameOver() {
 
 // randomizer function
 function randomizer() {
-  let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
-  console.log(ranQuestion)
+  ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
   return ranQuestion;
 }
 
 // answerRandomizer function
 function answerRandomizer() {
-  index = Math.floor(Math.random() * answersArr.length)
-  /* console.log(index) */
-  let ranAnswer = answersArr[index];
-  /* console.log(ranAnswer) */
-  answersArr.splice(index, 1)
+  answersArr = [
+    ranQuestion.answers.trueAnswer,
+    ranQuestion.answers.wrongAnswer1,
+    ranQuestion.answers.wrongAnswer2,
+    ranQuestion.answers.wrongAnswer3,
+  ]
+  console.log(answersArr)
+  i = Math.floor(Math.random() * 3)
+  console.log(i)
+  let ranAnswer = answersArr[i];
+  console.log(ranAnswer)
+  answersArr.delete(i);
   return ranAnswer;
 }
 
@@ -199,7 +186,7 @@ function countdown(time) {
 }
 
 init();
-button1.addEventListener("click", checkAnswer)
-button2.addEventListener("click", checkAnswer)
-button3.addEventListener("click", checkAnswer)
-button4.addEventListener("click", checkAnswer)
+button1.addEventListener("click", this.checkAnswer)
+button2.addEventListener("click", this.checkAnswer)
+button3.addEventListener("click", this.checkAnswer)
+button4.addEventListener("click", this.checkAnswer)

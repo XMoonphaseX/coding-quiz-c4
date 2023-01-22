@@ -33,7 +33,7 @@ let button1 = document.querySelector('.num1');
 let button2 = document.querySelector('.num2');
 let button3 = document.querySelector('.num3');
 let button4 = document.querySelector('.num4');
-let choices = document.querySelector('.choice')
+// let choices = document.getElementsByClassName('.choice')
 let ol = document.querySelector('#list')
 let TorF = document.querySelector('#TorF')
 let ranQuestion, ranAnswer, values
@@ -107,7 +107,10 @@ function startGame() {
   startButton.setAttribute('style', 'display: none');
   paragraph.setAttribute('style', 'display: none');
   drawGame();
-  checkAnswer();
+  button1.addEventListener("click", checkAnswer);
+  button2.addEventListener("click", checkAnswer);
+  button3.addEventListener("click", checkAnswer);
+  button4.addEventListener("click", checkAnswer);
 }
 
 //  Draw game function
@@ -124,57 +127,19 @@ function drawGame() {
 
 // Check answer function
 function checkAnswer() {
-  button1.addEventListener("click", function() {
-    console.log('true ans: ' + ranQuestion.trueAnswer)
-    console.log(this.textContent.slice(3,button1.textContent.length))
-    if (this.textContent.slice(3,button1.textContent.length) == ranQuestion.trueAnswer &&
-     this.textContent.slice(3,button1.textContent.length).length === ranQuestion.trueAnswer.length) {
-      TorF.textContent = 'Correct!'
-      TorF.setAttribute('style', 'font-style: italic')
-    } else {
-      TorF.textContent = 'Correct!'
-      TorF.setAttribute('style', 'font-style: italic')
-    }
-  });
-
-  button2.addEventListener("click", function() {
-    console.log('true ans: ' + ranQuestion.trueAnswer)
-    console.log(this.textContent.slice(3,button2.textContent.length))
-    if (this.textContent.slice(3,button2.textContent.length) === ranQuestion.trueAnswer &&
-    this.textContent.slice(3,button2.textContent.length).length === ranQuestion.trueAnswer.length) {
-      TorF.textContent = 'Correct!'
-      TorF.setAttribute('style', 'font-style: italic')
-    } else {
-      TorF.textContent = 'Incorrect!'
-      TorF.setAttribute('style', 'font-style: italic')
-    }
-  });
-
-  button3.addEventListener("click", function() {
-    console.log('true ans: ' + ranQuestion.trueAnswer)
-    console.log(this.textContent.slice(3,button3.textContent.length))
-    if (this.textContent.slice(3,button3.textContent.length) === ranQuestion.trueAnswer &&
-    this.textContent.slice(3,button3.textContent.length).length === ranQuestion.trueAnswer.length) {
-      TorF.textContent = 'Correct!'
-      TorF.setAttribute('style', 'font-style: italic')
-    } else {
-      TorF.textContent = 'Incorrect!'
-      TorF.setAttribute('style', 'font-style: italic')
-    }
-  });
-
-  button4.addEventListener("click", function() {
-    console.log('true ans: ' + ranQuestion.trueAnswer)
-    console.log(this.textContent.slice(3,button4.textContent.length))
-    if (this.textContent.slice(3,button4.textContent.length) === ranQuestion.trueAnswer &&
-    this.textContent.slice(3,button4.textContent.length).length === ranQuestion.trueAnswer.length) {
-      TorF.textContent = 'Correct!'
-      TorF.setAttribute('style', 'font-style: italic')
-    } else {
-      TorF.textContent = 'Incorrect!'
-      TorF.setAttribute('style', 'font-style: italic')
-    }
-  });
+  /* console.log(this.textContent)
+  console.log('true ans: ' + ranQuestion.answers.trueAnswer)
+  console.log(this.textContent.slice(3,this.textContent.length)) */
+  let text = this.textContent.slice(3,this.textContent.length)
+  if (text == ranQuestion.answers.trueAnswer) {
+    TorF.textContent = 'Correct!'
+    TorF.setAttribute('style', 'font-style: italic')
+    return true;
+  } else {
+    TorF.textContent = 'Incorrect!'
+    TorF.setAttribute('style', 'font-style: italic')
+    return false;
+  }
 }
 
 // Game over function
@@ -186,7 +151,7 @@ function gameOver() {
 // randomizer function
 function randomizer() {
   let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
-  console.log(ranQuestion)
+  // console.log(ranQuestion)
   values = Object.values(ranQuestion.answers);
   return ranQuestion;
 }

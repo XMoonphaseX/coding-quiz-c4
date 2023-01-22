@@ -157,6 +157,7 @@ function checkAnswer() {
 // Function store score
 function storeScore() {
   localStorage.setItem("score", JSON.stringify(todos));
+
 }
 
 // Game over function
@@ -170,6 +171,7 @@ function randomizer() {
   let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
   // console.log(ranQuestion)
   values = Object.values(ranQuestion.answers);
+
   return ranQuestion;
 }
 
@@ -208,3 +210,7 @@ function countdown(time) {
 }
 
 init();
+button1.addEventListener("click", this.checkAnswer)
+button2.addEventListener("click", this.checkAnswer)
+button3.addEventListener("click", this.checkAnswer)
+button4.addEventListener("click", this.checkAnswer)

@@ -29,6 +29,10 @@ let timeRem = document.querySelector('#timeLeft');
 let question = document.querySelector('.question');
 let paragraph = document.querySelector('#p');
 let startButton = document.querySelector('.start');
+let allDone = document.querySelector('#allDone')
+let initalsLabel = document.querySelector('#initals')
+let initalsInput = document.querySelector('#initalsInput')
+let initalsSubmit = document.querySelector('#submit')
 let button1 = document.querySelector('.num1');
 let button2 = document.querySelector('.num2');
 let button3 = document.querySelector('.num3');
@@ -108,6 +112,7 @@ function init() {
   question.textContent = 'Coding Quiz Challenge'
   paragraph.textContent = 'Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!'
   ol.setAttribute('style', 'display: none');
+  allDone.setAttribute('style', 'display: none')
 }
 
 // startGame function
@@ -147,7 +152,6 @@ function checkAnswer() {
     TorF.setAttribute('style', 'font-style: italic');
     score.correct = score.correct + 1;
     console.log(score);
-    storeScore();
     drawGame();
     return true;
   } else {
@@ -156,7 +160,6 @@ function checkAnswer() {
     score.incorrect = score.incorrect + 1
     time = time - 10
     console.log(score);
-    storeScore();
     drawGame();
     return false;
   }
@@ -171,6 +174,10 @@ function storeScore() {
 function gameOver() {
   ol.setAttribute('style', 'display: none')
   question.textContent = 'All Done!';
+  initalsLabel.setAttribute('style', 'display: flex')
+  initalsLabel.textContent = 'Enter initals: '
+  initalsSubmit.textContent = 'Submit'
+  allDone.setAttribute('style', 'display: flex')
 }
 
 // randomizer function
@@ -178,7 +185,6 @@ function randomizer() {
   let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
   // console.log(ranQuestion)
   values = Object.values(ranQuestion.answers);
-
   return ranQuestion;
 }
 

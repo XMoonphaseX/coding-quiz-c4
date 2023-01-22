@@ -17,7 +17,8 @@ p {
 }
 
 .choice,
-.start {
+.start,
+#submit {
   font-size: 1em;
   padding: 0.2em;
   background-color: blueviolet;
@@ -45,6 +46,16 @@ main {
 #list {
   flex-direction: column;
   width: 30%;
+}
+
+#allDone {
+  width: 40%;
+  border-bottom: 1px solid black;
+  padding-bottom: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .choice {

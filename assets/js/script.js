@@ -45,12 +45,6 @@ let ol = document.querySelector('#list')
 let TorF = document.querySelector('#TorF')
 let ranQuestion, ranAnswer, values
 
-let score = {
-  'correct': 0,
-  'incorrect': 0,
-  'time': 0,
-}
-
 // Array questions
 let questionsArr = [
   {
@@ -115,6 +109,13 @@ function init() {
   allDone.setAttribute('style', 'display: none')
 }
 
+// submitInitals function
+function submitInitals(event) {
+  event.preventDefault()
+  console.log(initalsInput.value)
+  storeScore(initalsInput.value);
+}
+
 // startGame function
 function startGame() {
   countdown();
@@ -150,34 +151,31 @@ function checkAnswer() {
   if (text == ranQuestion.answers.trueAnswer) {
     TorF.textContent = 'Correct!';
     TorF.setAttribute('style', 'font-style: italic');
-    score.correct = score.correct + 1;
-    console.log(score);
     drawGame();
     return true;
   } else {
     TorF.textContent = 'Incorrect!';
     TorF.setAttribute('style', 'font-style: italic');
-    score.incorrect = score.incorrect + 1
     time = time - 10
-    console.log(score);
     drawGame();
     return false;
   }
 }
 
 // Function store score
-function storeScore() {
-  localStorage.setItem("score", JSON.stringify(score));
+function storeScore(initals) {
+  localStorage.setItem("Scores", initals + ': ' + time);
 }
 
 // Game over function
 function gameOver() {
-  ol.setAttribute('style', 'display: none')
+  ol.setAttribute('style', 'display: none');
   question.textContent = 'All Done!';
-  initalsLabel.setAttribute('style', 'display: flex')
-  initalsLabel.textContent = 'Enter initals: '
-  initalsSubmit.textContent = 'Submit'
-  allDone.setAttribute('style', 'display: flex')
+  initalsLabel.setAttribute('style', 'display: flex');
+  initalsLabel.textContent = 'Enter initals: ';
+  initalsSubmit.textContent = 'Submit';
+  allDone.setAttribute('style', 'display: flex');
+  initalsSubmit.addEventListener("click", submitInitals);
 }
 
 // randomizer function

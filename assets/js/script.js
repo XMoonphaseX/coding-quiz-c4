@@ -36,7 +36,7 @@ let button4 = document.querySelector('.num4');
 let choices = document.querySelector('.choice')
 let ol = document.querySelector('#list')
 let TorF = document.querySelector('#TorF')
-let ranQuestion
+let ranQuestion, ranAnswer, values
 
 // Array questions
 let questionsArr = [
@@ -116,10 +116,10 @@ function drawGame() {
   // console.log(answersArr);
   question.textContent = ranQuestion.question;
   ol.setAttribute('style', 'display: flex')
-  button1.textContent = '1. ' + answerRandomizer(ranQuestion.answers);
-  button2.textContent = '2. ' + answerRandomizer(ranQuestion.answers);
-  button3.textContent = '3. ' + answerRandomizer(ranQuestion.answers);
-  // button4.textContent = '4. ' + answersArr[0];
+  button1.textContent = '1. ' + answerRandomizer();
+  button2.textContent = '2. ' + answerRandomizer();
+  button3.textContent = '3. ' + answerRandomizer();
+  button4.textContent = '4. ' + values[0];
 }
 
 // Check answer function
@@ -187,22 +187,18 @@ function gameOver() {
 function randomizer() {
   let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
   console.log(ranQuestion)
+  values = Object.values(ranQuestion.answers);
   return ranQuestion;
 }
 
 // answerRandomizer function
-function answerRandomizer(obj) {
-  let keys = Object.values(obj);
-  let ranKey = keys[Math.floor(Math.random() * keys.length)];
-  console.log(ranKey) 
-  let ranAnswer = ranQuestion['question["rankey"]']
-  console.log(ranAnswer)
-  /* console.log(answersArr)
-  index = Math.floor(Math.random() * 3)
-  console.log(index)
-  let ranAnswer = ranQuestion.answers[index];
-  console.log(ranAnswer)
-  return ranAnswer; */
+function answerRandomizer() {
+  let i = Math.floor(Math.random() * values.length)
+  // console.log(i)
+  let ranAnswer = values[i];
+  let splice = values.splice(i, 1);
+  // console.log(values + '||' + splice)
+  return ranAnswer;
 }
 
 // Countdown function

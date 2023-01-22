@@ -33,6 +33,9 @@ let button1 = document.querySelector('.num1');
 let button2 = document.querySelector('.num2');
 let button3 = document.querySelector('.num3');
 let button4 = document.querySelector('.num4');
+let dev1 = document.querySelector('#dev1')
+let dev2 = document.querySelector('#dev2')
+let time = 60;
 // let choices = document.getElementsByClassName('.choice')
 let ol = document.querySelector('#list')
 let TorF = document.querySelector('#TorF')
@@ -109,7 +112,7 @@ function init() {
 
 // startGame function
 function startGame() {
-  countdown(60);
+  countdown();
   startButton.setAttribute('style', 'display: none');
   paragraph.setAttribute('style', 'display: none');
   drawGame();
@@ -117,6 +120,8 @@ function startGame() {
   button2.addEventListener("click", checkAnswer);
   button3.addEventListener("click", checkAnswer);
   button4.addEventListener("click", checkAnswer);
+  dev1.addEventListener("click", function() {time = time + 60})
+  dev2.addEventListener("click", function() {time = time - 30})
 }
 
 //  Draw game function
@@ -141,14 +146,17 @@ function checkAnswer() {
     TorF.textContent = 'Correct!';
     TorF.setAttribute('style', 'font-style: italic');
     score.correct = score.correct + 1;
-    // console.log(score);
+    console.log(score);
+    storeScore();
     drawGame();
     return true;
   } else {
     TorF.textContent = 'Incorrect!';
     TorF.setAttribute('style', 'font-style: italic');
     score.incorrect = score.incorrect + 1
-    // console.log(score);
+    time = time - 10
+    console.log(score);
+    storeScore();
     drawGame();
     return false;
   }
@@ -156,8 +164,7 @@ function checkAnswer() {
 
 // Function store score
 function storeScore() {
-  localStorage.setItem("score", JSON.stringify(todos));
-
+  localStorage.setItem("score", JSON.stringify(score));
 }
 
 // Game over function
@@ -186,7 +193,7 @@ function answerRandomizer() {
 }
 
 // Countdown function
-function countdown(time) {
+function countdown() {
   let timeInterval = setInterval(function () {
     // As long as the `time` is greater than 1
     if (time > 1) {

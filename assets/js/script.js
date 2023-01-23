@@ -89,13 +89,123 @@ let questionsArr = [
     }
   },
 
+  {
+    'question': 'How do you create a function in JavaScript?',
+    'answers': {
+      'trueAnswer': 'function myFunction()',
+      'wrongAnswer1': 'function:myFunction()',
+      'wrongAnswer2': 'function = myFunction()',
+      'wrongAnswer3': 'myFunction() = function',
+    }  
+  },
+
+  {
+    'question': 'Which built-in method returns the calling string value converted to upper case?',
+    'answers': {
+      'trueAnswer': 'toUpperCase()',
+      'wrongAnswer1': 'toUpper()',
+      'wrongAnswer2': 'changeCase(case)',
+      'wrongAnswer3': 'None of the above.',
+    }  
+  },
+
+  {
+    'question': 'Which of the following function of String object splits a String object into an array of strings by separating the string into substrings?',
+    'answers': {
+      'trueAnswer': 'split()',
+      'wrongAnswer1': 'slice()',
+      'wrongAnswer2': 'replace()',
+      'wrongAnswer3': 'search()',
+    }  
+  },
+
+  {
+    'question': 'Which of the following function of Array object returns true if every element in this array satisfies the provided testing function?',
+    'answers': {
+      'trueAnswer': 'every()',
+      'wrongAnswer1': 'concat()',
+      'wrongAnswer2': 'push()',
+      'wrongAnswer3': 'some()',
+    }  
+  },
+
+  {
+    'question': 'Which of the following function of Array object represents the source code of an object?',
+    'answers': {
+      'trueAnswer': 'toSource()',
+      'wrongAnswer1': 'splice()',
+      'wrongAnswer2': 'toString()',
+      'wrongAnswer3': 'unshift()',
+    }  
+  },
+
+  {
+    'question': 'Which of the following type of variable is visible only within a function where it is defined?',
+    'answers': {
+      'trueAnswer': 'local variable',
+      'wrongAnswer1': 'global variable',
+      'wrongAnswer2': 'Both of the above.',
+      'wrongAnswer3': 'None of the above.',
+    }  
+  },
+
+  {
+    'question': 'Which is the correct way to write a comment in JavaScript?',
+    'answers': {
+      'trueAnswer': '// ....',
+      'wrongAnswer1': '{# ... #}',
+      'wrongAnswer2': '<!--- .... ---!>',
+      'wrongAnswer3': '\\ ...',
+    }  
+  },
+
+  {
+    'question': 'Which one of the following is correct?',
+    'answers': {
+      'trueAnswer': 'i = i++1;',
+      'wrongAnswer1': 'i += 1;',
+      'wrongAnswer2': 'i =+ 1;',
+      'wrongAnswer3': '+i+;',
+    }  
+  },
+
+  {
+    'question': 'IsNaN() Evaluates And Argument To Determine if Given Value:',
+    'answers': {
+      'trueAnswer': 'Is Not a Number',
+      'wrongAnswer1': 'Is Not a New Object',
+      'wrongAnswer2': 'Is Not a Null',
+      'wrongAnswer3': 'None Of The Above',
+    }  
+  },
+
+  {
+    'question': 'Which Of The Dialog Box Display a Message And a Data Entry Field?',
+    'answers': {
+      'trueAnswer': 'Alert()',
+      'wrongAnswer1': 'Prompt()',
+      'wrongAnswer2': 'Confirm()',
+      'wrongAnswer3': 'Msg()',
+    }  
+  },
+
+  {
+    'question': 'A Function Associated With An object is Called:',
+    'answers': {
+      'trueAnswer': 'Method',
+      'wrongAnswer1': 'Function',
+      'wrongAnswer2': 'Link',
+      'wrongAnswer3': 'None',
+    }  
+  },
+
   /* {
     'question': '',
     'answers': {
       'trueAnswer': '',
       'wrongAnswer1': '',
       'wrongAnswer2': '',
-      'wrongAnswer3': '',',
+      'wrongAnswer3': '',
     }  
   }, */
 ]

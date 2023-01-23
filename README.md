@@ -1,7 +1,7 @@
 # 04 Web APIs: Code Quiz
 
 ## Deployment Link 🔗
-[Deployed link](https://xmoonphasex.github.io/my-coding-quiz-C4/)
+[Deployed link](https://xmoonphasex.github.io/my-coding-quiz-C4/)<br>
 [Repo](https://github.com/XMoonphaseX/my-coding-quiz-C4)
 
 ## Your Task

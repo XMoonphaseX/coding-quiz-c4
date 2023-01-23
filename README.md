@@ -44,6 +44,9 @@ The following animation demonstrates the application functionality:
 ### All Done
 ![Game Over](./assets/images/game-over.png)<br>
 
+### View Highscores
+![View Highscores](./assets/images/highscores.png)<br>
+
 ## Grading Requirements
 
 > **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:

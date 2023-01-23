@@ -39,11 +39,13 @@ let button3 = document.querySelector('.num3');
 let button4 = document.querySelector('.num4');
 let dev1 = document.querySelector('#dev1')
 let dev2 = document.querySelector('#dev2')
+let dev3 = document.querySelector('#dev3')
 let time = 60;
 // let choices = document.getElementsByClassName('.choice')
-let ol = document.querySelector('#list')
+let ol = document.querySelector('#orderedList')
 let TorF = document.querySelector('#TorF')
 let ranQuestion, ranAnswer, values
+let localScores = []
 
 // Array questions
 let questionsArr = [
@@ -112,8 +114,10 @@ function init() {
 // submitInitals function
 function submitInitals(event) {
   event.preventDefault()
-  console.log(initalsInput.value)
+  //console.log(initalsInput.value)
   storeScore(initalsInput.value);
+  allDone.setAttribute('style', 'display: none')
+  highscores();
 }
 
 // startGame function
@@ -128,9 +132,36 @@ function startGame() {
   button4.addEventListener("click", checkAnswer);
   dev1.addEventListener("click", function() {time = time + 60})
   dev2.addEventListener("click", function() {time = time - 30})
+  dev3.addEventListener("click", gameOver)
 }
 
-//  Draw game function
+// highscores function
+function highscores() {
+  TorF.setAttribute('style', 'display: none');
+  button1.setAttribute('style', 'display: none');
+  button2.setAttribute('style', 'display: none');
+  button3.setAttribute('style', 'display: none');
+  button4.setAttribute('style', 'display: none');
+  startButton.setAttribute('style', 'display: none');
+  timeRem.setAttribute('style', 'display: none');
+  startButton.setAttribute('style', 'display: none');
+  ol.setAttribute('style', 'display: flex');
+  localScores = JSON.parse(localStorage.getItem('scores'))
+  question.textContent = 'Highscores';
+  // paragraph.textContent = JSON.parse(localStorage.getItem('scores'))
+  // Render a new li for each score indx
+  for (var i = 0; i < localScores.length; i++) {
+    let score = localScores[i];
+
+    let li = document.createElement("li");
+    li.textContent = (i + 1) + '.' + score;
+    li.setAttribute("data-index", i);
+    li.setAttribute('style', 'font-size: 150%');
+    ol.appendChild(li);
+  }
+}
+
+// Draw game function
 function drawGame() {
   ranQuestion = randomizer()
   // console.log(answersArr);
@@ -164,11 +195,21 @@ function checkAnswer() {
 
 // Function store score
 function storeScore(initals) {
-  localStorage.setItem("Scores", initals + ': ' + time);
+  if (isNaN(initals)) {
+    let score = initals + ': ' + time
+    console.log(score)
+    console.log(localScores)
+    localScores.push(score);
+    localStorage.setItem("scores", JSON.stringify(localScores));
+  } else {
+    alert('ERROR NOT A VALID CHARACTER')
+  }
 }
 
 // Game over function
 function gameOver() {
+  local = JSON.parse(localStorage.getItem('scores'));
+  paragraph.setAttribute('style', 'display: none');
   ol.setAttribute('style', 'display: none');
   question.textContent = 'All Done!';
   initalsLabel.setAttribute('style', 'display: flex');
@@ -217,11 +258,15 @@ function countdown() {
       clearInterval(timeInterval);
       gameOver();
     }
+    if (question.textContent == 'All Done!') {
+      clearInterval(timeInterval);
+    }
   }, 1000);
 }
 
 init();
-button1.addEventListener("click", this.checkAnswer)
-button2.addEventListener("click", this.checkAnswer)
-button3.addEventListener("click", this.checkAnswer)
-button4.addEventListener("click", this.checkAnswer)
+button1.addEventListener("click", this.checkAnswer);
+button2.addEventListener("click", this.checkAnswer);
+button3.addEventListener("click", this.checkAnswer);
+button4.addEventListener("click", this.checkAnswer);
+viewHighscores.addEventListener("click", highscores)

@@ -39,6 +39,7 @@ let button3 = document.querySelector('.num3');
 let button4 = document.querySelector('.num4');
 let dev1 = document.querySelector('#dev1')
 let dev2 = document.querySelector('#dev2')
+let dev3 = document.querySelector('#dev3')
 let time = 60;
 // let choices = document.getElementsByClassName('.choice')
 let ol = document.querySelector('#orderedList')
@@ -113,8 +114,10 @@ function init() {
 // submitInitals function
 function submitInitals(event) {
   event.preventDefault()
-  console.log(initalsInput.value)
+  //console.log(initalsInput.value)
   storeScore(initalsInput.value);
+  allDone.setAttribute('style', 'display: none')
+  highscores();
 }
 
 // startGame function
@@ -129,36 +132,36 @@ function startGame() {
   button4.addEventListener("click", checkAnswer);
   dev1.addEventListener("click", function() {time = time + 60})
   dev2.addEventListener("click", function() {time = time - 30})
+  dev3.addEventListener("click", gameOver)
 }
 
 // highscores function
 function highscores() {
-  question.textContent = 'Highscores';
-  paragraph.setAttribute('style', 'display: flex');
-  console.log(JSON.parse(localStorage.getItem('scores')))
-  paragraph.textContent = JSON.parse(localStorage.getItem('scores'))
-  ol.setAttribute('style', 'display: none');
-  startButton.setAttribute('style', 'display: none');
-  viewHighscores.setAttribute('style', 'display: none');
-  allDone.setAttribute('style', 'display: none');
   TorF.setAttribute('style', 'display: none');
-  // Render a new li for each todo
-  for (var i = 0; i < todos.length; i++) {
-    let localScores = todos[i];
+  button1.setAttribute('style', 'display: none');
+  button2.setAttribute('style', 'display: none');
+  button3.setAttribute('style', 'display: none');
+  button4.setAttribute('style', 'display: none');
+  startButton.setAttribute('style', 'display: none');
+  timeRem.setAttribute('style', 'display: none');
+  startButton.setAttribute('style', 'display: none');
+  ol.setAttribute('style', 'display: flex');
+  localScores = JSON.parse(localStorage.getItem('scores'))
+  question.textContent = 'Highscores';
+  // paragraph.textContent = JSON.parse(localStorage.getItem('scores'))
+  // Render a new li for each score indx
+  for (var i = 0; i < localScores.length; i++) {
+    let score = localScores[i];
 
     let li = document.createElement("li");
-    li.textContent = todo;
+    li.textContent = (i + 1) + '.' + score;
     li.setAttribute("data-index", i);
-
-    let button = document.createElement("button");
-    button.textContent = "Complete ✔️";
-
-    li.appendChild(button);
-    todoList.appendChild(li);
+    li.setAttribute('style', 'font-size: 150%');
+    ol.appendChild(li);
   }
 }
 
-//  Draw game function
+// Draw game function
 function drawGame() {
   ranQuestion = randomizer()
   // console.log(answersArr);
@@ -192,12 +195,21 @@ function checkAnswer() {
 
 // Function store score
 function storeScore(initals) {
-  localScores.unshift(initals + ': ' + time)
-  localStorage.setItem("scores", JSON.stringify(localScores));
+  if (isNaN(initals)) {
+    let score = initals + ': ' + time
+    console.log(score)
+    console.log(localScores)
+    localScores.push(score);
+    localStorage.setItem("scores", JSON.stringify(localScores));
+  } else {
+    alert('ERROR NOT A VALID CHARACTER')
+  }
 }
 
 // Game over function
 function gameOver() {
+  local = JSON.parse(localStorage.getItem('scores'));
+  paragraph.setAttribute('style', 'display: none');
   ol.setAttribute('style', 'display: none');
   question.textContent = 'All Done!';
   initalsLabel.setAttribute('style', 'display: flex');
@@ -245,6 +257,9 @@ function countdown() {
       console.log(time)
       clearInterval(timeInterval);
       gameOver();
+    }
+    if (question.textContent == 'All Done!') {
+      clearInterval(timeInterval);
     }
   }, 1000);
 }

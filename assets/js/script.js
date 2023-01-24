@@ -245,7 +245,7 @@ function highscores() {
   startButton.setAttribute('style', 'display: none');
   ol.setAttribute('style', 'display: none');
   hsList.setAttribute('style', 'display: flex');
-  localScores = JSON.parse(localStorage.getItem('scores'));
+  localScores = JSON.parse(localStorage.getItem('scores')) || [];
   question.textContent = 'Highscores';
   goBack.textContent = 'Go Back';
   clearScores.textContent = 'Clear Highscores';
@@ -305,6 +305,7 @@ function storeScore(initals) {
     let score = initals + ': ' + time
     console.log(score)
     console.log(localScores)
+    localScores = JSON.parse(localStorage.getItem('scores')) || [];
     localScores.push(score);
     localStorage.setItem("scores", JSON.stringify(localScores));
   } else {
@@ -357,18 +358,17 @@ function answerRandomizer() {
 // Countdown function
 function countdown() {
   let timeInterval = setInterval(function () {
+    time--;
     // As long as the `time` is greater than 1
     if (time > 1) {
       // Set the `textContent` of `time` to show the remaining seconds
       /* console.log(time) */
       timeRem.textContent = 'Time: ' + time + ' seconds';
       // Decrement `time` by 1
-      time--;
     }else if (time === 1) {
       console.log(time)
       // When `time` is equal to 1, rename to 'second' instead of 'seconds'
       timeRem.textContent = 'Time: ' + time + ' second';
-      time--;
     }else {
       timeRem.textContent = '';
       console.log(time)

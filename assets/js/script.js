@@ -1,27 +1,6 @@
-/* Functions:
-
-timer
-  when timer is = 0 display final score and input box for name
-store score
-
-view highscores
-
-start game
-  timer
-  display question[random]
-  display ordered list with one right answer
-
-check
-  if buttonpressed = answer
-    display correct
-    correct ++
-  else 
-    display wrong
-    timer --
-    wrong ++
-
-init
-  initalize page */
+/* 
+When questions answered == 15 then gameover
+*/
 
 // Variables
 let viewHighscores = document.querySelector('#viewHighscores');
@@ -29,20 +8,23 @@ let timeRem = document.querySelector('#timeLeft');
 let question = document.querySelector('.question');
 let paragraph = document.querySelector('#p');
 let startButton = document.querySelector('.start');
-let allDone = document.querySelector('#allDone')
-let initalsLabel = document.querySelector('#initals')
-let initalsInput = document.querySelector('#initalsInput')
-let initalsSubmit = document.querySelector('#submit')
+let allDone = document.querySelector('#allDone');
+let initalsLabel = document.querySelector('#initals');
+let initalsInput = document.querySelector('#initalsInput');
+let initalsSubmit = document.querySelector('#submit');
+let goBack = document.querySelector('.goBack');
+let clearScores = document.querySelector('.clearHighscores')
 let button1 = document.querySelector('.num1');
 let button2 = document.querySelector('.num2');
 let button3 = document.querySelector('.num3');
 let button4 = document.querySelector('.num4');
-let dev1 = document.querySelector('#dev1')
-let dev2 = document.querySelector('#dev2')
-let dev3 = document.querySelector('#dev3')
+let dev1 = document.querySelector('#dev1');
+let dev2 = document.querySelector('#dev2');
+let dev3 = document.querySelector('#dev3');
 let time = 60;
 // let choices = document.getElementsByClassName('.choice')
-let ol = document.querySelector('#orderedList')
+let ol = document.querySelector('#numList')
+let hsList = document.querySelector('#hsList')
 let TorF = document.querySelector('#TorF')
 let ranQuestion, ranAnswer, values
 let localScores = []
@@ -218,7 +200,11 @@ function init() {
   question.textContent = 'Coding Quiz Challenge'
   paragraph.textContent = 'Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!'
   ol.setAttribute('style', 'display: none');
-  allDone.setAttribute('style', 'display: none')
+  allDone.setAttribute('style', 'display: none');
+  goBack.setAttribute('style', 'display: none');
+  clearScores.setAttribute('style', 'display: none');
+  paragraph.setAttribute('style', 'display: flex');
+  startButton.setAttribute('style', 'display: flex')
 }
 
 // submitInitals function
@@ -240,13 +226,15 @@ function startGame() {
   button2.addEventListener("click", checkAnswer);
   button3.addEventListener("click", checkAnswer);
   button4.addEventListener("click", checkAnswer);
-  dev1.addEventListener("click", function() {time = time + 60})
-  dev2.addEventListener("click", function() {time = time - 30})
-  dev3.addEventListener("click", gameOver)
+  dev1.addEventListener("click", function() {time = time + 60});
+  dev2.addEventListener("click", function() {time = time - 30});
+  dev3.addEventListener("click", gameOver);
 }
 
 // highscores function
 function highscores() {
+  goBack.setAttribute('style', 'display: flex');
+  clearScores.setAttribute('style', 'display: flex');
   TorF.setAttribute('style', 'display: none');
   button1.setAttribute('style', 'display: none');
   button2.setAttribute('style', 'display: none');
@@ -255,10 +243,12 @@ function highscores() {
   startButton.setAttribute('style', 'display: none');
   timeRem.setAttribute('style', 'display: none');
   startButton.setAttribute('style', 'display: none');
-  ol.setAttribute('style', 'display: flex');
-  localScores = JSON.parse(localStorage.getItem('scores'))
+  ol.setAttribute('style', 'display: none');
+  hsList.setAttribute('style', 'display: flex');
+  localScores = JSON.parse(localStorage.getItem('scores'));
   question.textContent = 'Highscores';
-  // paragraph.textContent = JSON.parse(localStorage.getItem('scores'))
+  goBack.textContent = 'Go Back';
+  clearScores.textContent = 'Clear Highscores';
   // Render a new li for each score indx
   for (var i = 0; i < localScores.length; i++) {
     let score = localScores[i];
@@ -267,12 +257,14 @@ function highscores() {
     li.textContent = (i + 1) + '.' + score;
     li.setAttribute("data-index", i);
     li.setAttribute('style', 'font-size: 150%');
-    ol.appendChild(li);
+    hsList.appendChild(li);
   }
+  goBack.addEventListener('click', init);
 }
 
 // Draw game function
 function drawGame() {
+  hsList.setAttribute('style', 'display: none');
   ranQuestion = randomizer()
   // console.log(answersArr);
   question.textContent = ranQuestion.question;
@@ -281,6 +273,10 @@ function drawGame() {
   button2.textContent = '2. ' + answerRandomizer();
   button3.textContent = '3. ' + answerRandomizer();
   button4.textContent = '4. ' + values[0];
+  button1.setAttribute('style', 'display: flex');
+  button2.setAttribute('style', 'display: flex');
+  button3.setAttribute('style', 'display: flex');
+  button4.setAttribute('style', 'display: flex');
 }
 
 // Check answer function
@@ -316,6 +312,11 @@ function storeScore(initals) {
   }
 }
 
+// Function clear highscores
+function clearHighscores() {
+
+}
+
 // Game over function
 function gameOver() {
   local = JSON.parse(localStorage.getItem('scores'));
@@ -331,10 +332,16 @@ function gameOver() {
 
 // randomizer function
 function randomizer() {
-  let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
-  // console.log(ranQuestion)
-  values = Object.values(ranQuestion.answers);
-  return ranQuestion;
+  
+  for(let q = 0; q < 15; q++){
+    let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
+    // console.log(ranQuestion)
+    values = Object.values(ranQuestion.answers);
+    return ranQuestion;
+  }
+  if(q = 14) {
+    gameOver();
+  }
 }
 
 // answerRandomizer function

@@ -18,7 +18,9 @@ p {
 
 .choice,
 .start,
-#submit {
+#submit,
+.goBack,
+.clearHighscores {
   font-size: 1em;
   padding: 0.2em;
   background-color: blueviolet;
@@ -43,7 +45,9 @@ main {
   align-items: center;
 }
 
-#orderedList {
+#numList,
+#hsList {
+  display: flex;
   flex-direction: column;
   width: 30%;
 }
@@ -88,4 +92,11 @@ main {
   position: absolute;
   bottom: 0;
   left: 4em;
+}
+
+#highscore-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 15%;
 }

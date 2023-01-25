@@ -9,9 +9,9 @@ let question = document.querySelector('.question');
 let paragraph = document.querySelector('#p');
 let startButton = document.querySelector('.start');
 let allDone = document.querySelector('#allDone');
-let initalsLabel = document.querySelector('#initals');
-let initalsInput = document.querySelector('#initalsInput');
-let initalsSubmit = document.querySelector('#submit');
+let initialsLabel = document.querySelector('#initials');
+let initialsInput = document.querySelector('#initialsInput');
+let initialsSubmit = document.querySelector('#submit');
 let goBack = document.querySelector('.goBack');
 let clearScores = document.querySelector('.clearHighscores')
 let button1 = document.querySelector('.num1');
@@ -21,13 +21,14 @@ let button4 = document.querySelector('.num4');
 let dev1 = document.querySelector('#dev1');
 let dev2 = document.querySelector('#dev2');
 let dev3 = document.querySelector('#dev3');
-let time = 60;
+let time = 120;
 // let choices = document.getElementsByClassName('.choice')
 let ol = document.querySelector('#numList')
 let hsList = document.querySelector('#hsList')
 let TorF = document.querySelector('#TorF')
 let ranQuestion, ranAnswer, values
 let localScores = []
+let q
 
 // Array questions
 let questionsArr = [
@@ -164,8 +165,8 @@ let questionsArr = [
   {
     'question': 'Which Of The Dialog Box Display a Message And a Data Entry Field?',
     'answers': {
-      'trueAnswer': 'Alert()',
-      'wrongAnswer1': 'Prompt()',
+      'trueAnswer': 'Prompt()',
+      'wrongAnswer1': 'Alert()',
       'wrongAnswer2': 'Confirm()',
       'wrongAnswer3': 'Msg()',
     }  
@@ -194,11 +195,13 @@ let questionsArr = [
 
 // Initalize funtion
 function init() {
+  q = 0;
   startButton.addEventListener("click", startGame);
   viewHighscores.textContent = 'View Highscores';
-  /* timeRem.textContent = 'Time: ' + time + ' seconds'; */
+  timeRem.textContent = 'Time: ' + time + ' seconds';
   question.textContent = 'Coding Quiz Challenge'
   paragraph.textContent = 'Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!'
+  hsList.setAttribute('style', 'display: none');
   ol.setAttribute('style', 'display: none');
   allDone.setAttribute('style', 'display: none');
   goBack.setAttribute('style', 'display: none');
@@ -207,11 +210,11 @@ function init() {
   startButton.setAttribute('style', 'display: flex')
 }
 
-// submitInitals function
-function submitInitals(event) {
+// submitInitials function
+function submitInitials(event) {
   event.preventDefault()
-  //console.log(initalsInput.value)
-  storeScore(initalsInput.value);
+  //console.log(initialsInput.value)
+  storeScore(initialsInput.value);
   allDone.setAttribute('style', 'display: none')
   highscores();
 }
@@ -246,15 +249,21 @@ function highscores() {
   ol.setAttribute('style', 'display: none');
   hsList.setAttribute('style', 'display: flex');
   localScores = JSON.parse(localStorage.getItem('scores')) || [];
+
+  localScores.sort(function(a, b) {
+    return b.time - a.time;
+  })
+
   question.textContent = 'Highscores';
   goBack.textContent = 'Go Back';
   clearScores.textContent = 'Clear Highscores';
   // Render a new li for each score indx
+  hsList.innerHTML = '';
   for (var i = 0; i < localScores.length; i++) {
     let score = localScores[i];
 
     let li = document.createElement("li");
-    li.textContent = (i + 1) + '.' + score;
+    li.textContent = (i + 1) + '.' + score.initials + ' : ' + score.time;
     li.setAttribute("data-index", i);
     li.setAttribute('style', 'font-size: 150%');
     hsList.appendChild(li);
@@ -264,10 +273,10 @@ function highscores() {
 
 // Draw game function
 function drawGame() {
-  hsList.setAttribute('style', 'display: none');
   ranQuestion = randomizer()
   // console.log(answersArr);
   question.textContent = ranQuestion.question;
+  hsList.setAttribute('style', 'display: none');
   ol.setAttribute('style', 'display: flex')
   button1.textContent = '1. ' + answerRandomizer();
   button2.textContent = '2. ' + answerRandomizer();
@@ -294,15 +303,19 @@ function checkAnswer() {
     TorF.textContent = 'Incorrect!';
     TorF.setAttribute('style', 'font-style: italic');
     time = time - 10
+    timeRem.textContent = 'Time: ' + time + ' seconds';
     drawGame();
     return false;
   }
 }
 
 // Function store score
-function storeScore(initals) {
-  if (isNaN(initals)) {
-    let score = initals + ': ' + time
+function storeScore(initials) {
+  if (isNaN(initials)) {
+    let score = {
+      initials: initials,
+      time: time,
+    }
     console.log(score)
     console.log(localScores)
     localScores = JSON.parse(localStorage.getItem('scores')) || [];
@@ -320,29 +333,30 @@ function clearHighscores() {
 
 // Game over function
 function gameOver() {
+  clearInterval(timeInterval);
+  question.textContent = 'All Done!';
   local = JSON.parse(localStorage.getItem('scores'));
   paragraph.setAttribute('style', 'display: none');
   ol.setAttribute('style', 'display: none');
-  question.textContent = 'All Done!';
-  initalsLabel.setAttribute('style', 'display: flex');
-  initalsLabel.textContent = 'Enter initals: ';
-  initalsSubmit.textContent = 'Submit';
+  initialsLabel.setAttribute('style', 'display: flex');
+  initialsLabel.textContent = 'Enter initials: ';
+  initialsSubmit.textContent = 'Submit';
   allDone.setAttribute('style', 'display: flex');
-  initalsSubmit.addEventListener("click", submitInitals);
+  initialsSubmit.addEventListener("click", submitInitials);
 }
 
 // randomizer function
 function randomizer() {
-  
-  for(let q = 0; q < 15; q++){
-    let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
-    // console.log(ranQuestion)
-    values = Object.values(ranQuestion.answers);
-    return ranQuestion;
-  }
-  if(q = 14) {
+  q ++;
+  let ranQuestion = (questionsArr[Math.floor(Math.random() * questionsArr.length)]);
+  // console.log(ranQuestion)
+  values = Object.values(ranQuestion.answers);
+  console.log(q);
+  if(q == 5) {
     gameOver();
+    return;
   }
+  return ranQuestion;
 }
 
 // answerRandomizer function
@@ -354,10 +368,10 @@ function answerRandomizer() {
   // console.log(values + '||' + splice)
   return ranAnswer;
 }
-
+let timeInterval
 // Countdown function
 function countdown() {
-  let timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     time--;
     // As long as the `time` is greater than 1
     if (time > 1) {
@@ -386,4 +400,8 @@ button1.addEventListener("click", this.checkAnswer);
 button2.addEventListener("click", this.checkAnswer);
 button3.addEventListener("click", this.checkAnswer);
 button4.addEventListener("click", this.checkAnswer);
-viewHighscores.addEventListener("click", highscores)
+viewHighscores.addEventListener("click", highscores);
+clearScores.addEventListener("click", function(){
+  window.localStorage.removeItem("scores");
+  window.location.reload();
+})

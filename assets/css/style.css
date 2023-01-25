@@ -71,7 +71,15 @@ main {
   font-size: 2em;
 }
 
-#dev1 {
+#highscore-btns {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 80%;
+}
+
+/* #dev1 {
   background-color: green;
   padding: 0.5em;
   position: absolute;
@@ -92,11 +100,4 @@ main {
   position: absolute;
   bottom: 0;
   left: 4em;
-}
-
-#highscore-btns {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 15%;
-}
+} */

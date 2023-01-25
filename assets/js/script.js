@@ -196,15 +196,15 @@ function init() {
   startButton.addEventListener("click", startGame);
   viewHighscores.textContent = 'View Highscores';
   timeRem.textContent = 'Time: ' + time + ' seconds';
-  question.textContent = 'Coding Quiz Challenge'
-  paragraph.textContent = 'Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!'
+  question.textContent = 'Coding Quiz Challenge';
+  paragraph.textContent = 'Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!';
   hsList.setAttribute('style', 'display: none');
   ol.setAttribute('style', 'display: none');
   allDone.setAttribute('style', 'display: none');
   goBack.setAttribute('style', 'display: none');
   clearScores.setAttribute('style', 'display: none');
   paragraph.setAttribute('style', 'display: flex');
-  startButton.setAttribute('style', 'display: flex')
+  startButton.setAttribute('style', 'display: flex');
 }
 
 // startGame function called when the start game button is pressed
@@ -233,12 +233,12 @@ function countdown() {
       timeRem.textContent = 'Time: ' + time + ' seconds';
       // Decrement `time` by 1
     }else if (time === 1) {
-      console.log(time)
+      console.log(time);
       // When `time` is equal to 1, rename to 'second' instead of 'seconds'
       timeRem.textContent = 'Time: ' + time + ' second';
     }else {
       timeRem.textContent = '';
-      console.log(time)
+      console.log(time);
       clearInterval(timeInterval);
       gameOver();
     }
@@ -250,11 +250,11 @@ function countdown() {
 
 // Draw game function
 function drawGame() {
-  ranQuestion = randomizer()
+  ranQuestion = randomizer();
   // console.log(answersArr);
   question.textContent = ranQuestion.question;
   hsList.setAttribute('style', 'display: none');
-  ol.setAttribute('style', 'display: flex')
+  ol.setAttribute('style', 'display: flex');
   button1.textContent = '1. ' + answerRandomizer();
   button2.textContent = '2. ' + answerRandomizer();
   button3.textContent = '3. ' + answerRandomizer();
@@ -281,7 +281,7 @@ function randomizer() {
 
 // answerRandomizer function
 function answerRandomizer() {
-  let i = Math.floor(Math.random() * values.length)
+  let i = Math.floor(Math.random() * values.length);
   // console.log(i)
   let ranAnswer = values[i];
   values.splice(i, 1);
@@ -302,7 +302,7 @@ function checkAnswer() {
   } else {
     TorF.textContent = 'Incorrect!';
     TorF.setAttribute('style', 'font-style: italic');
-    time = time - 10
+    time = time - 10;
     timeRem.textContent = 'Time: ' + time + ' seconds';
     drawGame();
     return false;
@@ -325,10 +325,10 @@ function gameOver() {
 
 // submitInitials function to stop the event loading by default
 function submitInitials(event) {
-  event.preventDefault()
+  event.preventDefault();
   //console.log(initialsInput.value)
   storeScore(initialsInput.value);
-  allDone.setAttribute('style', 'display: none')
+  allDone.setAttribute('style', 'display: none');
   highscores();
 }
 
@@ -338,14 +338,14 @@ function storeScore(initials) {
     let score = {
       initials: initials,
       time: time,
-    }
-    console.log(score)
-    console.log(localScores)
+    };
+    console.log(score);
+    console.log(localScores);
     localScores = JSON.parse(localStorage.getItem('scores')) || [];
     localScores.push(score);
     localStorage.setItem("scores", JSON.stringify(localScores));
   } else {
-    alert('ERROR NOT A VALID CHARACTER')
+    alert('ERROR NOT A VALID CHARACTER');
   }
 }
 

@@ -1,6 +1,3 @@
-/* 
-When questions answered == 15 then gameover
-*/
 
 // Variables
 let viewHighscores = document.querySelector('#viewHighscores');
@@ -30,7 +27,7 @@ let ranQuestion, ranAnswer, values
 let localScores = []
 let q
 
-// Array questions
+// Array of questions
 let questionsArr = [
   {
     'question': 'Commonly used data types DO NOT include:',
@@ -193,7 +190,7 @@ let questionsArr = [
   }, */
 ]
 
-// Initalize funtion
+// Initalize funtion called at the bottom of the page
 function init() {
   q = 0;
   startButton.addEventListener("click", startGame);
@@ -210,7 +207,7 @@ function init() {
   startButton.setAttribute('style', 'display: flex')
 }
 
-// submitInitials function
+// submitInitials function to stop the event loading by default
 function submitInitials(event) {
   event.preventDefault()
   //console.log(initialsInput.value)
@@ -219,7 +216,7 @@ function submitInitials(event) {
   highscores();
 }
 
-// startGame function
+// startGame function called when the start game button is pressed
 function startGame() {
   countdown();
   startButton.setAttribute('style', 'display: none');
@@ -229,9 +226,9 @@ function startGame() {
   button2.addEventListener("click", checkAnswer);
   button3.addEventListener("click", checkAnswer);
   button4.addEventListener("click", checkAnswer);
-  dev1.addEventListener("click", function() {time = time + 60});
+  /* dev1.addEventListener("click", function() {time = time + 60});
   dev2.addEventListener("click", function() {time = time - 30});
-  dev3.addEventListener("click", gameOver);
+  dev3.addEventListener("click", gameOver); */
 }
 
 // highscores function
@@ -352,7 +349,7 @@ function randomizer() {
   // console.log(ranQuestion)
   values = Object.values(ranQuestion.answers);
   console.log(q);
-  if(q == 5) {
+  if(q == 15) {
     gameOver();
     return;
   }
@@ -364,8 +361,7 @@ function answerRandomizer() {
   let i = Math.floor(Math.random() * values.length)
   // console.log(i)
   let ranAnswer = values[i];
-  let splice = values.splice(i, 1);
-  // console.log(values + '||' + splice)
+  values.splice(i, 1);
   return ranAnswer;
 }
 let timeInterval

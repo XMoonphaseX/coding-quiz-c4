@@ -1,17 +1,12 @@
 # My Coding Quiz
 
 ## Description
+This was a fun assignment. I struggled with the local storage at first but then managed to wrap my head around all the JSON.
 <br>
 
 ## Deployment Link 🔗
 [Deployed link](https://xmoonphasex.github.io/my-coding-quiz-C4/)<br>
-[Repo](https://github.com/XMoonphaseX/my-coding-quiz-C4)
-
-At some point in your journey to become a full-stack web developer, you’ll likely be asked to complete a coding assessment&mdash;perhaps as part of an interview process. A typical coding assessment includes both multiple-choice questions and interactive coding challenges. 
-
-To help familiarize you with these tests and allow you to use the skills covered in this module, this Challenge invites you to build a timed coding quiz with multiple-choice questions. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean, polished, and responsive user interface. 
-
-This week’s coursework will equip you with all the skills you need to succeed in this assignment.<br>
+[Repo](https://github.com/XMoonphaseX/my-coding-quiz-C4)<br>
 
 ## User Story 📘
 ```
@@ -37,7 +32,6 @@ THEN I can save my initials and my score
 
 ## Demo Given
 The following animation demonstrates the application functionality:
-
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](./assets/images/04-web-apis-homework-demo.gif)<br>
 
 ## Deployment gif

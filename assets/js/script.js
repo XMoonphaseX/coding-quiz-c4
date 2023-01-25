@@ -18,17 +18,16 @@ let button4 = document.querySelector('.num4');
 let dev1 = document.querySelector('#dev1');
 let dev2 = document.querySelector('#dev2');
 let dev3 = document.querySelector('#dev3');
-let timeInterval
+let timeInterval;
 let time = 120;
-// let choices = document.getElementsByClassName('.choice')
-let ol = document.querySelector('#numList')
-let hsList = document.querySelector('#hsList')
-let TorF = document.querySelector('#TorF')
+let ol = document.querySelector('#numList');
+let hsList = document.querySelector('#hsList');
+let TorF = document.querySelector('#TorF');
 let ranQuestion, ranAnswer, values
-let localScores = []
-let q
+let localScores = [];
+let q;
 
-// Array of questions
+// Array of questions 15 total
 let questionsArr = [
   {
     'question': 'Commonly used data types DO NOT include:',

@@ -4,37 +4,47 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Reset stylesheet -->
   <link rel="stylesheet" href="./assets/css/reset.css">
   <link rel="stylesheet" href="./assets/css/style.css">
   <title>Quiz</title>
 </head>
 <body>
+  <!-- Header with highscores and timeleft -->
   <header>
     <label id='viewHighscores'></label>
     <label id='timeLeft'></label>
   </header>
+  <!-- Main class -->
   <main>
+    <!-- Question main header -->
     <h1 class='question'></h1>
     <p id='p'></p>
+    <!-- Start Button -->
     <button class='start'>Start Quiz</button>
-    <ol id='numList'>
+    <ol id='numList'><!-- Ordered List of buttons -->
       <li><button class='choice num1'></button></li>
       <li><button class='choice num2'></button></li>
       <li><button class='choice num3'></button></li>
       <li><button class='choice num4'></button></li>
     </ol>
+    <!-- Alldone/Initials form -->
     <form id='allDone' method='POST'>
       <label id='initials'></label>
       <input id='initialsInput' type="text" autocomplete='off'>
       <button id='submit'></button>
     </form>
+    <!-- OL for appending the highscores list -->
     <ol id='hsList'></ol>
+    <!-- Section for the highscore buttons so I could separate them -->
     <section id='highscore-btns'>
       <button class='goBack'></button>
       <button class='clearHighscores'></button> 
     </section>
+    <!-- The label for telling whether they were correct or incorrect -->
     <label id='TorF'></label> 
   </main>
+  <!-- Dev Buttons to control time and functions -->
   <!-- <button id='dev1'></button>
   <button id='dev2'></button>
   <button id='dev3'></button> -->

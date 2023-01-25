@@ -1,3 +1,4 @@
+/* Header Styling basic flexbox */
 header {
   display: flex;
   flex-direction: row;
@@ -5,17 +6,20 @@ header {
   padding: 0.5em;
 }
 
+/* Styling for the question tag */
 .question {
   font-size: 2.5em;
   margin-bottom: 1em;
   font-weight: bolder;
 }
 
+/* Styling for the paragraph under the question */
 p {
   font-size: 1.5em;
   margin-bottom: 1em;
 }
 
+/* Styling for all the buttons adding basic coloring and padding */
 .choice,
 .start,
 #submit,
@@ -35,16 +39,19 @@ p {
   max-width: 40%;
 }
 
+/* Specific styling for the submit button */
 .submit {
   width: fit-content;
 }
 
+/* Main flexbox */
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* List flexbox */
 #numList,
 #hsList {
   display: flex;
@@ -52,6 +59,7 @@ main {
   width: 30%;
 }
 
+/* All done page styling */
 #allDone {
   width: 40%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.575);
@@ -63,14 +71,12 @@ main {
   margin-bottom: 0.5em;
 }
 
+/* Choice margin bottom */
 .choice {
   margin-bottom: 0.5em;
 }
 
-#TorF {
-  font-size: 2em;
-}
-
+/* Highscore button container flexbox */
 #highscore-btns {
   margin-top: 2em;
   display: flex;
@@ -78,6 +84,13 @@ main {
   justify-content: space-evenly;
   width: 80%;
 }
+
+/* True or false styling */
+#TorF {
+  font-size: 2em;
+}
+
+/* Dev button positioning and styling */
 
 /* #dev1 {
   background-color: green;

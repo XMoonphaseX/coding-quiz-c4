@@ -35,7 +35,7 @@ The following animation demonstrates the application functionality:
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](./assets/images/04-web-apis-homework-demo.gif)<br>
 
 ## Deployment gif
-<img src='./assets/images/deployment.gif' width= 50%>
+<img src='./assets/images/deployment.gif' width= 90%>
 <br>
 
 ## Credits

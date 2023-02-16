@@ -5,8 +5,8 @@ This was a fun assignment. I struggled with the local storage at first but then 
 <br>
 
 ## Deployment Link 🔗
-[Deployed link](https://xmoonphasex.github.io/my-coding-quiz-C4/)<br>
-[Repo](https://github.com/XMoonphaseX/my-coding-quiz-C4)<br>
+[Deployed link](https://moonphase13.github.io/my-coding-quiz-C4/)<br>
+[Repo](https://github.com/moonphase13/my-coding-quiz-C4)<br>
 
 ## User Story 📘
 ```
@@ -43,4 +43,4 @@ To me because I actually enjoy doing JS
 <br>
 
 ## Licence 🔑
-MIT © XMoonphaseX
+MIT © moonphase13
